@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Eternal Love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            min-height: 100vh;
+            color: #2d3436;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-slider {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    margin: 2rem auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Agar gambar tidak terpotong */
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    padding: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .photo-slider {
+        height: 300px;
+        max-width: 300px;
+    }
+    
+        .slide {
+            padding: 5px;
+        }
+    }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .love-meter {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-container {
+            position: relative;
+            margin: 2rem 0;
+            min-height: 200px;
+        }
+
+        .secret-message {
+            display: none;
+            padding: 1.5rem;
+            background: #ffffff;
+            border-radius: 10px;
+            margin-top: 1rem;
+            animation: fadeIn 1s;
+        }
+
+        .music-player {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+        }
+
+        button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0.5rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>❤️ MYKA ❤️</h1>
+            <div class="photo-slider">
+                <img src="rifka1.jpg" class="slide active" alt="Our Memory">
+                <img src="yogi.png" class="slide" alt="Our Memory">
+                <img src="rifka3.jpg" class="slide" alt="Our Memory">
+            </div>
+        </header>
+
+        <div class="love-meter">
+            <h2>Love Compatibility Meter</h2>
+            <div id="lovePercentage">??%</div>
+            <button onclick="calculateLove()">Calculate Our Love</button>
+        </div>
+
+        <div class="message-container">
+            <button onclick="revealMessage()">Click for Secret Message</button>
+            <div id="secretMessage" class="secret-message"></div>
+        </div>
+
+        <div class="music-player">
+            <h3>Our Song</h3>
+            <audio id="ourSong" controls>
+                <source src="our-song.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <button onclick="showTimeline()">Our Journey</button>
+    </div>
+
+    <script>
+        // Photo Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000);
+
+        // Love Calculator
+        function calculateLove() {
+            const lovePercentage = Math.floor(Math.random() * 41) + 60; // Always between 60-100%
+            document.getElementById('lovePercentage').textContent = `${lovePercentage}%`;
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Secret Message
+        function revealMessage() {
+            const messages = [
+                "Setiap hari bersamamu adalah halaman baru dalam kisah terindahku...",
+                "Kau adalah alasan mengapa senyum selalu menghiasi wajahku...",
+                "Di antara milyaran bintang di langit, kaulah yang paling terang...",
+                "Aku memilihmu hari ini, besok, dan selamanya..."
+            ];
+            const secretMessage = document.getElementById('secretMessage');
+            secretMessage.style.display = 'block';
+            secretMessage.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        // Timeline Show
+        function showTimeline() {
+            const startDate = new Date('2024-09-01'); // Ganti dengan tanggal jadian kalian
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            Swal.fire({
+                title: 'Our Journey',
+                html: `<p>Kita sudah bersama selama:</p>
+                     <h2>${diffDays} Hari</h2>
+                     <p>Dan akan terus bertambah...</p>`,
+                imageUrl: 'heart.png',
+                confirmButtonText: 'Teruskan Cinta Kita'
+            });
+        }
+
+        // Background Music Control
+        const audioPlayer = document.getElementById('ourSong');
+        document.body.addEventListener('click', () => {
+            audioPlayer.play().catch(() => {});
+        });
+
+        // Confetti Effect
+        function confetti({ particleCount, spread, origin }) {
+            for (let i = 0; i < particleCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    top: ${origin.y * 100}%;
+                    background: hsl(${Math.random() * 360}, 100%, 50%);
+                    width: 10px;
+                    height: 10px;
+                    position: fixed;
+                    border-radius: 2px;
+                    animation: confetti-fall ${Math.random() * 3 + 2}s linear;
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes confetti-fall {
+                    0% { transform: translateY(0) rotate(0deg); }
+                    100% { transform: translateY(100vh) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
